@@ -15,7 +15,7 @@ import schedule
 # coding:utf-8
 import codecs
 
-master = modbus_rtu.RtuMaster(serial.Serial(port='COM19', baudrate=19200, bytesize=8, parity='N', stopbits=1, xonxoff=0))
+master = modbus_rtu.RtuMaster(serial.Serial(port='/dev/ttyS1', baudrate=19200, bytesize=8, parity='N', stopbits=1, xonxoff=0))
 master.set_timeout(5.0)
 master.set_verbose(True)
 
