@@ -205,35 +205,39 @@ def job():
 
 
 def job_pre():
-    schedule.every(5).seconds.do(job)
-    while True:
-        schedule.run_pending()  
-        time.sleep(1)
-
+    try:
+        schedule.every(5).seconds.do(job)
+        while True:
+            schedule.run_pending()  
+            time.sleep(1)
+    except:
+        pass
 
 if __name__ == '__main__':
+    while True:
+        try:
+            AC_PowerOn()
+            time.sleep(1)
+            Fan_speed_OnOff()
+            time.sleep(1)
     
-    AC_PowerOn()
-    time.sleep(1)
-    Fan_speed_OnOff()
-    time.sleep(1)
-    
-    t = threading.Thread(target = job_pre)
-    t.start()
+            t = threading.Thread(target = job_pre)
+            t.start()
     
     
-    meter_token = 'IZcJiw4YcQFvDyBno9pd'
-    meter_pass = ''
-    url = 'thingsboard.cloud'
+            meter_token = 'IZcJiw4YcQFvDyBno9pd'
+            meter_pass = ''
+            url = 'thingsboard.cloud'
 
-    client02 = mqtt.Client()
-    client02.on_connect = on_connect
-    client02.on_message = on_message
-    client02.username_pw_set(meter_token, meter_pass)
-    client02.connect(url, 1883, 60)
+            client02 = mqtt.Client()
+            client02.on_connect = on_connect
+            client02.on_message = on_message
+            client02.username_pw_set(meter_token, meter_pass)
+            client02.connect(url, 1883, 60)
     
-    client02.loop_forever()
-
+            client02.loop_forever()
+        except:
+            pass
     
     
     '''
