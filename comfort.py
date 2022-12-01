@@ -195,7 +195,7 @@ def job():
     client01.username_pw_set(meter_token, meter_pass)
     client01.connect(url, 1883, 60)
     
-    payload = {'Temperature' : evm_temp, 'Humidity':evm_humi, 'comfortair':num_comfort, 'FanSpeed':Fan_SetSpeed, 'TempSet':temp_set}
+    payload = {'Temperature' : evm_temp, 'Humidity':evm_humi, 'comfortair':num_comfort[1], 'FanSpeed':Fan_SetSpeed, 'TempSet':temp_set}
     client01.publish("v1/devices/me/telemetry", json.dumps(payload))
     
 
